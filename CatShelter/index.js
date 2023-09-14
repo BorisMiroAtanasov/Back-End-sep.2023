@@ -1,5 +1,5 @@
 const http = require("http");
-const homeTemplate = require('./views/home/index');
+const homeHtml = require('./views/home/index');
 //const { log } = require("console");
 const PORT = 5000
 
@@ -8,8 +8,13 @@ const PORT = 5000
 const server = http.createServer((req, res) =>{
     const {url} = req;
     console.log(url);
+    console.log(homeHtml);
     if(url === '/'){
-        console.log(homeTemplate);
+        res.writeHead(200, {
+            "Content-type": "text/html"
+        })
+
+        res.write(homeHtml)
     }
 
     res.write('Hellow Update');
