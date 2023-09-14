@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+exports.homeTemplate = `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -87,4 +87,4 @@
 
 </body>
 
-</html>
+</html>`
