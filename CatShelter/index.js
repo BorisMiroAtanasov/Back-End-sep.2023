@@ -1,6 +1,6 @@
 const http = require("http");
-const homeHtml = require('./views/home/index');
-//const { log } = require("console");
+const homeHtml = require('./views/home/index.js');
+const siteCss = require('./content/styles/site.js')
 const PORT = 5000
 
 
