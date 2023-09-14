@@ -15,6 +15,12 @@ const server = http.createServer((req, res) =>{
         })
 
         res.write(homeHtml)
+    } else if(url === '/content/styles/site.css'){
+        res.writeHead(200, {
+            "Content-type": "text/css"
+        });
+        res.write(siteCss)
+
     }
 
     res.write('Hellow Update');
