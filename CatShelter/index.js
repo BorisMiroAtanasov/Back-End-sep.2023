@@ -36,8 +36,9 @@ const cats = [
 
 const server = http.createServer((req, res) => {
   const { url } = req;
-//   console.log(url);
-  // console.log(homeHtml);
+ // const path = url.
+// console.log(url);
+  //console.log(homeHtml);
   if (url === "/") {
     const imageUlrPattern = /{{imageUrl}}/g;
     const namePattern = /{{name}}/g;
