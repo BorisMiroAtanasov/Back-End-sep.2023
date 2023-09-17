@@ -3,6 +3,7 @@ const homeHtml = require("./views/home/index.js");
 const siteCss = require("./content/styles/site.js");
 const addBreedHtml = require("./views/addBreed.js")
 const addCatHtml = require("./views/addCat.js")
+const editCatHtml = require("./views/editCat.js")
 const catTemplate = require ("./views/home/catsTemplate.js")
 const PORT = 5000;
 
@@ -37,7 +38,7 @@ const cats = [
 const server = http.createServer((req, res) => {
   const { url } = req;
  // const path = url.
-// console.log(url);
+ console.log(url);
   //console.log(homeHtml);
   if (url === "/") {
     const imageUlrPattern = /{{imageUrl}}/g;
@@ -71,6 +72,13 @@ const server = http.createServer((req, res) => {
         "Content-type": "text/html",
       });
     res.write(addCatHtml);
+
+  }else if (url === '/cats/edit-cat'){
+    res.writeHead(200, {
+      "Content-type": "text/html",
+    });
+    res.write(editCatHtml);
+
   }
 
  
