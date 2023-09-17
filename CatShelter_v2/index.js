@@ -23,11 +23,7 @@ const server = http.createServer((req, res) => {
       });
     
     res.write(homeTemplate)
-  } else if(url === "/content/styles/site.css"){
-    res.writeHead(200, {
-        "content-type": "text/css",
-      });
-      res.write(styleCss)
+  
   } else if(url === "/cats/add-cat"){
     res.writeHead(200, {
         "content-type": "text/html",
@@ -41,11 +37,15 @@ const server = http.createServer((req, res) => {
 
   }else if(/cats\/\d+\/edit/.test(req.url)){
     let catID = req.url.split('/')[2];
-    let cat = cats.find((x) = x.id == catID);
+    let cat = cats.find((x) => x.id == catID);
     res.write(editPage(cat))
 
-  }
-  
+  } else if(url === "/content/styles/site.css"){
+    res.writeHead(200, {
+        "content-type": "text/css",
+      });
+      res.write(styleCss)
+    }
   
   else{
     res.write(errorPage)
