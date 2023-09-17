@@ -1,7 +1,11 @@
 const http = require("http");
-const homeTemplate = require("./views/home/index");
+const homeTemplate = require("./views/home/index.js");
 const styleCss = require("./content/styles/site");
-const addCat = require ("./views/addCat")
+const addCat = require ("./views/addCat.js")
+const addBreed = require("./views/addBreed.js");
+const editPage = require("./views/editCat.js")
+const errorPage = require("./erorr.js");
+const cats = require("./cats.json")
 const port = 5001;
 
 const server = http.createServer((req, res) => {
@@ -29,6 +33,22 @@ const server = http.createServer((req, res) => {
         "content-type": "text/html",
       });
       res.write(addCat)
+  }else if ( url === '/cats/add-breed'){
+    res.writeHead(200, {
+        "Content-type": "text/html",
+      });
+    res.write(addBreed);
+
+  }else if(/cats\/\d+\/edit/.test(req.url)){
+    let catID = req.url.split('/')[2];
+    let cat = cats.find((x) = x.id == catID);
+    res.write(editPage(cat))
+
+  }
+  
+  
+  else{
+    res.write(errorPage)
   }
   
 

@@ -1,3 +1,4 @@
+module.exports = `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,26 +10,20 @@
     <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
     <title>Cat Shelter</title>
 </head>
-
-<body>
+  
+    <body>
     <header>
         <nav>
             <ul class="navigation">
-                <li><a href="">Home Page</a></li>
-                <li><a href="">Add Breed</a></li>
-                <li><a href="">Add Cat</a></li>
+                <li><a href="/">Home Page</a></li>
+                <li><a href="/cats/add-breed">Add Breed</a></li>
+                <li><a href="/cats/add-cat">Add Cat</a></li>
             </ul>
         </nav>
-        <h1>Cat Shelter</h1>
     </header>
-    <main>
-        <form action="#" method="" class="cat-form">
-            <h2>Add Cat Breed</h2>
-            <label for="breed-name">Breed Name</label>
-            <input name="breed" type="text" id="breed-name">
-            <button type="submit">Add Breed</button>
-        </form>
-    </main>
-</body>
-
+    <div class="errorDiv">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4qdOnuQDQGQb1RTUi5vKI8UU7M9sgn4JHqQ&usqp=CAU" />
+    </div>
+    </body>
 </html>
+`;
