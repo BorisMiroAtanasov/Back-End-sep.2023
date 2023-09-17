@@ -1,0 +1,45 @@
+[
+    {
+        "id": 2,
+        "name": "Teri",
+        "imageUrl": "https://www.petfinder.com/static/688cf17eb9072ca995a6585f45404a5b/bb36c/bombay-card-large.webp",
+        "breed": "Bombay Cat",
+        "description": "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho."
+
+    },
+    {
+        "id": 2,
+        "name": "Bary",
+        "imageUrl": "https://www.petfinder.com/static/14d637ed767af6cba943a19d0a668923/bb36c/british-shorthair-card-large.webp",
+        "breed": "British Shorthair",
+        "description": "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho."
+
+    },
+    {
+        "id": 3,
+        "name": "Nicy",
+        "imageUrl": "https://www.petfinder.com/static/f2e74818958274249ee14f04cdbd58f4/bb36c/japanese-bobtail-card-large.webp",
+        "breed": "Japanese Bobtail",
+        "description": "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho."
+
+    },
+    {
+        "id": 4,
+        "name": "Tsunami",
+        "imageUrl": "https://www.petfinder.com/static/f56fb9b96735a79c4e5e634ae7b11137/bb36c/manx-card-large.webp",
+        "breed": "Manx",
+        "description": "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho."
+
+    }
+    ,
+    {
+        "id": 5,
+        "name": "Glezunka",
+        "imageUrl": "https://www.petfinder.com/static/d893338ee6546e6a40a350b9512d508f/bb36c/norwegian-forest-cat-card-large.webp",
+        "breed": "Norwegian Forest Cat",
+        "description": "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho."
+
+    }
+    
+    
+]
