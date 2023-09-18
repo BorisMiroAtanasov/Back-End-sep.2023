@@ -1,10 +1,10 @@
 const listeners = {}
 
-const publish = (eventName) => {
+const publish = (eventName,...eventArtgs) => {
     if(!listeners[eventName]){
         return;
     }
-    listeners[eventName].forEach((listener) => listener());
+    listeners[eventName].forEach((listener) => listener(...eventArtgs));
 };
 
 const subscribe = (eventName, eventListener) => {
