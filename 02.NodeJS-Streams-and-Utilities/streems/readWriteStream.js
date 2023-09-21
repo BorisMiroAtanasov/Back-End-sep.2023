@@ -1,8 +1,9 @@
 const fs = require('fs');
+const path = require('path')
 
 // Copy
-const readStream = fs.createReadStream('./input.txt');
-const writeStream = fs.createWriteStream('./output.txt');
+const readStream = fs.createReadStream(path.resolve(__dirname,'./input.txt'));
+const writeStream = fs.createWriteStream(path.resolve(__dirname,'./output.txt'));
 
 // react on read Stream
 
