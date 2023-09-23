@@ -38,8 +38,10 @@ const cats = [
 
 const server = http.createServer(async(req, res) => {
   const { url } = req;
+
+  
  // const path = url.
- console.log(url);
+ console.log(req);
   //console.log(homeHtml);
   if (url === "/") {
     const imageUlrPattern = /{{imageUrl}}/g;
