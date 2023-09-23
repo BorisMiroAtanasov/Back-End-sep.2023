@@ -1,14 +1,26 @@
 const http = require('http');
 const port = 5002;
+const handlers = require("./handlers")
 
 
 const server= http.createServer((req, res) => {
-   res.writeHead(200,{
-    "Content-Type": "text/plain"
-   });
 
-   res.write("Hellow JS WORD");
-   res.end()
+    for (const handler of handlers) {
+        if(!handler(req,res)){
+            break;
+        }
+        
+    }
+
+
+
+
+//    res.writeHead(200,{
+//     "Content-Type": "text/plain"
+//    });
+
+//    res.write("Hellow JS WORD");
+//    res.end()
 
 
 })

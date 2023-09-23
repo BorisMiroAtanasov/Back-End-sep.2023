@@ -41,7 +41,7 @@ const server = http.createServer(async(req, res) => {
 
   
  // const path = url.
- console.log(req);
+ console.log();
   //console.log(homeHtml);
   if (url === "/") {
     const imageUlrPattern = /{{imageUrl}}/g;
