@@ -2,7 +2,8 @@ const url = require("url");
 const fs = require("fs");
 const path = require("path");
 const qs = require("querystring");
-//const formidable = require('formidable');
+const formidable = require('formidable');
+
 const breeds = require('../data/breeds.json')
 const cats = require('../data/cats.json');
 
@@ -93,6 +94,35 @@ module.exports = (req, res) => {
 
 
     }
+    // do not works - add- cat
+    // else if (pathName === '/cats/add-cat' && req.method === 'POST'){
+    //     let form = new formidable.IncomingForm();
+
+    //     form.parse(req, (err, fields, files)=> {
+    //         if (err) throw err;
+
+    //         let oldPath = files.upload.filepath;
+    //         let newPath = path.normalize(path.join('C:/vscode/catShelter', '/content/images/' + files.upload.originalFilename))
+
+    //         fs.rename(oldPath, newPath, (err) => {
+    //             if (err) throw err;
+    //             console.log('File was uploaded succesSfully!')
+    //         })
+
+    //         fs.readFile('./data/cats.json', 'utf-8', (err, data) => {
+    //             if (err) throw err;
+
+    //             let allData = JSON.parse(data);
+    //             allData.push({id: cats.length + 1, ...fields, image: files.upload.originalFilename})
+    //             let json = JSON.stringify(allData)
+    //             fs.writeFile('./data/cats.json', json, () => {
+    //                 res.writeHead(303, {location: '/'})
+    //                 res.end();
+    //             })
+    //         })
+    //     })
+
+    //}
     else {
         return true;
     }
