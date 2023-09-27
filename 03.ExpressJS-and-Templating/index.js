@@ -16,5 +16,11 @@ app.get('/kittens', (req,res) =>{
     res.send("Hellow kittnes")
 
 });
+// wild card - оставяме най-накрая, изпълняват се последователно от горе на долу
+app.get('*', (req,res) =>{
+    res.status(404)
+    res.send("Sorry page is not found :(")
+
+});
 
 app.listen(port, () => console.log(`Server is listen on port ${port}` ))
