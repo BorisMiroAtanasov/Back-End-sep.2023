@@ -3,7 +3,7 @@ const app = express();
 const port = 5000
 
 //Routing
-
+//app HTTP methods - GET, POST,PUT,PACHA, DELETE(the most used)
 app.get('/', (req,res) =>{
     res.send("Welcome this is the home page")
 
