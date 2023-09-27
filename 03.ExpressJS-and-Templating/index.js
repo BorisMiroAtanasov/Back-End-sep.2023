@@ -12,8 +12,8 @@ app.get('/', (req,res) =>{
 //method = get
 //path = /kittens , route
 //Action = (req,res) => (hendler)
-app.get('/kittens', (req,res) =>{
-    res.send("Hellow kittnes")
+app.post('/kittens', (req,res) =>{
+    res.send("Kitten has been created!")
 
 });
 // wild card - оставяме най-накрая, изпълняват се последователно от горе на долу
