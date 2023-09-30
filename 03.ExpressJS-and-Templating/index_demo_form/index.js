@@ -1,7 +1,14 @@
 const express = require("express");
+const handlebars = require('express-handlebars')
 const app = express();
 const path = require ('path')
 const port = 5000;
+
+
+// View Engine
+app.engine("hbs", handlebars.engine({extname: "hbs"}));
+app.set("view engine", "hbs")
+
 // Middleware start
 // third-party-middleware
 const bodyParser = express.urlencoded({extended:false});
@@ -60,7 +67,8 @@ app.get("/kittens", (req, res) => {
   </html>`);
 });
 app.get("/", (req, res) =>{
-  res.send('This is home page')
+  //res.send('This is home page')
+  res.render("home")
 });
 
 // app.get("/specific",specificMiddleware ,(req, res)=> {
