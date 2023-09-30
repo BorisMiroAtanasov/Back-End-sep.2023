@@ -1,7 +1,8 @@
 const express = require("express");
 const handlebars = require('express-handlebars')
 const app = express();
-const path = require ('path')
+const path = require ('path');
+const {addKitten,getKittens} = require('./kittens.js')
 const port = 5000;
 
 
@@ -45,31 +46,41 @@ const specificMiddleware = (req, res , next) =>{
 //Routing
 //app HTTP methods - GET, POST,PUT,PACHA, DELETE(the most used)
 app.get("/kittens", (req, res) => {
-  res.send(`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="./style.css">
-      <title>Document</title>
-  </head>
-  <body>
-      <form method="post">
-          <label for="name">name:</label><br>
-          <input type="text" id="name" name="name" ><br>
-          <label for="age">Age:</label><br>
-          <input type="age" id="age" name="lname"><br>
-          <br>
-          <input type="submit" value="Create Kitten">
-        </form> 
+
+  const kittens = getKittens();
+ 
+  console.log(kittens)
+
+  res.render("kittens" , {kittens})
+  // res.send(`<!DOCTYPE html>
+  // <html lang="en">
+  // <head>
+  //     <meta charset="UTF-8">
+  //     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  //     <link rel="stylesheet" href="./style.css">
+  //     <title>Document</title>
+  // </head>
+  // <body>
+  //     <form method="post">
+  //         <label for="name">name:</label><br>
+  //         <input type="text" id="name" name="name" ><br>
+  //         <label for="age">Age:</label><br>
+  //         <input type="age" id="age" name="lname"><br>
+  //         <br>
+  //         <input type="submit" value="Create Kitten">
+  //       </form> 
         
-  </body>
-  </html>`);
+  // </body>
+  // </html>`);
 });
 app.get("/", (req, res) =>{
   //res.send('This is home page')
   res.render("home")
 });
+
+app.get("/about", (req, res) => {
+  res.render("about")
+})
 
 // app.get("/specific",specificMiddleware ,(req, res)=> {
 //   res.send("This is specific route ! :)")
@@ -90,6 +101,9 @@ app.get("/", (req, res) =>{
 // //path = /kittens , route
 // //Action = (req,res) => (hendler)
 app.post("/kittens", (req, res) => {
+  const name = req.body.name
+  const age = Number(req.body.age)
+  addKitten(name,age)
   console.log(req.body)
   res.send("Kitten has been created!");
 });
