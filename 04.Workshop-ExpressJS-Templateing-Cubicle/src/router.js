@@ -1,15 +1,12 @@
-const router = require('express').Router();
-const homeControler= require('./controllers/homeControler');
-const cubewControler= require('./controllers/cubeControler');
+const router = require("express").Router();
+const homeController = require("./controllers/homeControler");
+const cubeController = require("./controllers/cubeControler");
 
-
-router.use(homeControler);
-router.use('/cubes', cubewControler);
-
+router.use(homeController);
+router.use("/cubes", cubeController);
 
 router.get("*", (req, res) => {
-    res.redirect("/404");
-  });
+  res.redirect("/404");
+});
 
-
-module.exports = router
+module.exports = router;

@@ -17,4 +17,8 @@ router.post("/create", (req, res) => {
   res.redirect("/");
 });
 
+router.get(":cubreId/details", (req, res) =>{
+  
+})
+
 module.exports = router
