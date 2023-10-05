@@ -25,8 +25,9 @@ const cubes = [
 ];
 
 exports.create = (cubeData) => {
-    let newCube = {
-        id: uniqId(),
+  const id = uniqId()
+    const newCube = {
+        id,
         ...cubeData,
 
     }
@@ -36,6 +37,28 @@ exports.create = (cubeData) => {
 }
 
 
-exports.getAll = () => {
-    return [...cubes]
+exports.getAll = (search, from, to) => {
+   let filterCubes = [...cubes];
+   if(search){
+    filterCubes = filterCubes.filter(cube => cube.name.toLowerCase.includes(search));
+
+   }
+   if(from){
+    filterCubes = filterCubes.filter(cube => cube.difficultyLevel >= Number(from));
+  
+   }
+   if(to){
+    filterCubes = filterCubes.filter(cube => cube.difficultyLevel <= Number(to));
+    
+   }
+
+   return filterCubes;
+
+};
+
+
+exports.getSinleCube = (id) =>{
+  return cubes.find(cube => cube.id === id  )
 }
+
+
