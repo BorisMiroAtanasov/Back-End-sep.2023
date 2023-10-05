@@ -20,10 +20,20 @@
     <input type="submit" value="search" />
   </form>
 
-  {{#each cubes}}
+  {{!-- {{#each cubes}}
     {{>cubeTemplate}}
   {{else}}
    <h3>There are no cubes!</h3>
-  {{/each}}
+  {{/each}} --}}
+
+
+
+   {{#if cubes}}
+    {{#each cubes}}
+        {{>cubeTemplate}}
+    {{/each}}
+{{else}}
+<p>There are no cubes!</p>
+{{/if}} 
 
 </main>
