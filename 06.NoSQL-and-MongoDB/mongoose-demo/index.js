@@ -11,10 +11,15 @@ async function connectDb() {
 
    console.log(`You have been connectet to database: ${dataBaseName}`)
     
-
+const dogId = "6521deacd76f3f9806c4718f"
    const dogs = await dog.find();
 
-   console.log(dogs)
+  //  dogs.forEach( dog=> dog.bark())
+
+  //dogs.forEach(dog => console.log(dog.description))
+
+  const d = await dog.getDogsCollection(3);
+  console.log(d);
 }
 connectDb()
 
