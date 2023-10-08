@@ -1,14 +1,15 @@
 const router = require("express").Router();
 const cubeService = require("../service/cubeService");
 
+
 router.get("/create", (req, res) => {
   res.render("create");
 });
 
-router.post("/create", (req, res) => {
+router.post("/create", async (req, res) => {
   const { name, description, imageUrl, difficultyLevel } = req.body;
 
-  cubeService.create({
+  await cubeService.create({
     name,
     description,
     imageUrl,
