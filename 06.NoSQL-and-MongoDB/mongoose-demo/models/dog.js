@@ -5,7 +5,7 @@ const dogSchema = new mongoose.Schema({
     name: {
         require: [true, "Name is required"], 
         type: String,
-        minLength: 2,
+        minLength: 3,
         maxLength: 30
     },
     age: Number,
