@@ -12,8 +12,10 @@ const cube = await Cube.create(cubeData)
   return cube;
 };
 
-exports.getAll = (search, from, to) => {
-  let filterCubes = [...cubes];
+exports.getAll = async(search, from, to) => {
+ 
+
+  let filterCubes = await Cube.find().lean();
 
   if (search) {
     filterCubes = filterCubes.filter((cube) =>
@@ -37,5 +39,6 @@ exports.getAll = (search, from, to) => {
 };
 
 exports.getSingleCube = (id) => {
-  return cubes.find((cube) => cube.id === id);
+  return Cube.findById(id)
+  //return cubes.find((cube) => cube.id === id);
 };
