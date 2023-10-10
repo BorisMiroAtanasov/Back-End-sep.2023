@@ -3,7 +3,7 @@ const cubeService = require("../service/cubeService");
 
 
 router.get("/create", (req, res) => {
-  res.render("create");
+  res.render("cube/create");
 });
 
 router.post("/create", async (req, res) => {
@@ -28,7 +28,13 @@ router.get("/:cubeId/details", async(req, res) => {
     return;
   }
 
-  res.render("details", { ...cube });
+  res.render("cube/details", { ...cube });
 });
+
+router.get("/:cubeId/attach-accessory", (req, res) =>{
+
+
+  res.render("accessory/attach")
+})
 
 module.exports = router;
