@@ -5,6 +5,11 @@ const cubeSchema = new mongoose.Schema({
   description: String,
   imageUrl: String,
   difficultyLevel: Number,
+
+  accessories : [{
+    type: mongoose.Types.ObjectId, // type from nongo
+    ref: "Accessory" // the name of the model
+  }]
   
 });
 
