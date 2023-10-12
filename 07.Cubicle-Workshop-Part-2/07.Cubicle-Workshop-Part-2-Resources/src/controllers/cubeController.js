@@ -38,10 +38,10 @@ router.get("/:cubeId/attach-accessory",async(req, res) =>{
 const {cubeId} = req.params
 //console.log(req.params.cubeId)
 const cube = await cubeService.getSingleCube(cubeId).lean();
-const accessoryIds = cube.accessories ?cube.accessories.map((a) => a._id) : [];
-const accessories = await accessoryService.getWithoutOwned(accessoryIds).lean();
+//const accessoryIds = cube.accessories ?cube.accessories.map((a) => a._id) : [];
+const accessories = await accessoryService.getWithoutOwned(cube.accessories).lean();
 
-console.log(accessoryIds);
+//console.log(accessoryIds);
 const hasAccessory = accessories.length > 0 // view  data , template data
   res.render("accessory/attach", {cube, accessories, hasAccessory})
 });
