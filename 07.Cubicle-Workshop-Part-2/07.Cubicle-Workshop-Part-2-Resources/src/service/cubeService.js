@@ -39,7 +39,7 @@ exports.getAll = async(search, from, to) => {
 };
 
 exports.getSingleCube = (id) => {
-  return Cube.findById(id)
+  return Cube.findById(id).populate("accessories")
   //return cubes.find((cube) => cube.id === id);
 };
 

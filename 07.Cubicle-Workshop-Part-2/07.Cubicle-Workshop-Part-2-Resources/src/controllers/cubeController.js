@@ -22,14 +22,15 @@ router.post("/create", async (req, res) => {
 router.get("/:cubeId/details", async(req, res) => {
   const { cubeId } = req.params;
   const cube = await cubeService.getSingleCube(cubeId).lean();
-  //console.log(cube);
+  console.log(cube);
 
   if (!cube) {
     res.redirect("/404");
     return;
   }
-
-  res.render("cube/details", { ...cube });
+const accessories = cube.accessories;
+const hasAccessories =accessories=== undefined? false: accessories.length > 0;
+  res.render("cube/details", { ...cube,accessories,hasAccessories });
 });
 //accessory atachment related
 router.get("/:cubeId/attach-accessory",async(req, res) =>{
@@ -37,11 +38,12 @@ const {cubeId} = req.params
 //console.log(req.params.cubeId)
 const cube = await cubeService.getSingleCube(cubeId).lean();
 const accessories = await accessoryService.getAll().lean();
-const hasAccessory = accessories.length > 0 
+const hasAccessory = accessories.length > 0 // view  data , template data
   res.render("accessory/attach", {cube, accessories, hasAccessory})
 });
 
 router.post("/:cubeId/attach-accessory", async (req, res) =>{
+  // return Cube.findByIdAndUpdate({cubeId,{$push{accessories: accessoryId}}})
   const {cubeId} = req.params
   // console.log(cubeId);
   // console.log(req.body);
