@@ -1,17 +1,11 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const { v4: uuid } = require("uuid");
-const session = require('express-session')
 const PORT = 5050;
 const app = express();
-
+const session = {};
 
 app.use(cookieParser());
-app.use(session({
-    secret: "My biggest secret ever",
-    resave: false,
-    cookie: {secure:false}
-}))
 
 app.get("/", (req, res) => {
   let id;
