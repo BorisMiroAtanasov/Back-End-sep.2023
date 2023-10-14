@@ -1,36 +1,85 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const { v4: uuid } = require("uuid");
-const session = require('express-session')
 const PORT = 5050;
 const app = express();
+const bcrypt = require('bcrypt')
 
 
 app.use(cookieParser());
-app.use(session({
-    secret: "My biggest secret ever",
-    resave: false,
-    cookie: {secure:false}
-}))
+app.use(express.urlencoded({extended:false}));
+
+const users = {
+
+}
+
 
 app.get("/", (req, res) => {
-  let id;
-  const userId = req.cookies["userID"];
+//   let id;
+//   const userId = req.cookies["userID"];
 
-  if (userId) {
-    id = userId;
-    console.log({session});
+//   if (userId) {
+//     id = userId;
+//     console.log( req.session);
 
-  } else {
-    id = uuid();
+//   } else {
+//     id = uuid();
 
-    session[id] = {
-        secret: "my secret"
-    }
-    res.cookie("userID", id);
-  }
+   
+//     req.session.message = "Test 123"
+//     res.cookie("userID", id);
+//   }
 
-  res.send("Ok! ID:" + id);
+   res.send("Ok! ID:" );
+});
+
+app.get("/login", (req, res) =>{
+    res.send(`
+    <h3>Login</h3>
+    <form method="POST">
+    <label for="username">Username</label>
+    <input type="text" name="username">
+
+    <label for="password">Password</label>
+    <input type="password" name="password">
+
+    <input type="submit" value="Submit">
+
+</form>`)
+});
+
+app.get("/register", (req, res) =>{
+    console.log({users});
+    res.send(`
+    <h3>Register</h3>
+    <form method="POST">
+    <label for="username">Username</label>
+    <input type="text" name="username">
+
+    <label for="password">Password</label>
+    <input type="password" name="password">
+
+    <input type="submit" value="Submit">
+
+</form>`)
+});
+app.use('/login', (req,res) => {
+    const {username, password} = req.body;
+    const preservedHash = users[username]
+})
+
+app.post('/register', async (req,res) =>{
+    const {username, password} = req.body;
+    
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password,salt)
+    
+    
+    users[username] = {password: hash};
+
+    console.log({users});
+
+    res.redirect('/login')
 });
 
 app.listen(PORT, () => console.log(`Server is listen ot port: ${PORT}...`));
