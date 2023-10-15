@@ -8,9 +8,15 @@ const userSchema = new mongoose.Schema({
 });
 
 
+userSchema.virtual("repeatPassword").set(function (value) {
+    if (value !== this.password) {
+      throw new mongoose.MongooseError("Password missmatch!");
+    }
+  });
 
 
 const User = mongoose.model('User', userSchema);
 
 
-exports.model = User
+
+module.exports = User;

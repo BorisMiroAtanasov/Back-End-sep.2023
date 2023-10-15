@@ -1,8 +1,9 @@
+const User = require('../models/user')
 
 
 
 
+exports.reister = (userData) => {
+    return User.create(userData);
 
-exports.reister = (username,password,repeatPassword) => {
-    
 }
