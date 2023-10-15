@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const cubeService = require("../service/cubeService");
-const accessoryService = require("./../service/accessoryService")
+const accessoryService = require("./../service/accessoryService");
+const {dificultyLevelOptionsViewData} = require('../utils/viewData')
 
 
 router.get("/create", (req, res) => {
@@ -58,6 +59,24 @@ router.post("/:cubeId/attach-accessory", async (req, res) =>{
   await cubeService.attachAccessory(cubeId,accessoryId)
 
   res.redirect(`/cubes/${cubeId}/details`)
+});
+
+router.get('/:cubeId/edit', async (req, res) =>{
+  const {cubeId} = req.params;
+const cube = await cubeService.getSingleCube(cubeId).lean();
+const options = dificultyLevelOptionsViewData(cube.difficultyLevel);
+
+//console.log({options});
+
+  res.render("cube/edit", {cube,options})
+})
+
+router.get('/:cubeId/delete', async(req, res) =>{
+  const {cubeId} = req.params;
+  const cube = await cubeService.getSingleCube(cubeId).lean();
+  const options = dificultyLevelOptionsViewData(cube.difficultyLevel);
+  
+  res.render("cube/delete",{cube,options})
 })
 
 module.exports = router;
