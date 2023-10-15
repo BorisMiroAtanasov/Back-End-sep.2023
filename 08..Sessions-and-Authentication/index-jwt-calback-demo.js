@@ -1,6 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const jwt = require('./utils/jwt-util-promifi')
+const jwt = require('jsonwebtoken')
 const PORT = 5050;
 const app = express();
 const bcrypt = require('bcrypt')
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
     const payload = { id: 123, username: "Pesho", age: 12 };
     const options = { expiresIn: "3d" };
     const secret = 'ourBiggestSecret'
-    // Asyncronius code
+    // syncronius code
     const token = jwt.sign(payload, secret, options)
     res.send(token);
 });
@@ -70,23 +70,17 @@ app.post("/login", async (req, res) => {
 
     if (isValid) {
         // res.send("Successfuly Authenticate");
-        const payload = { username };
-
-
-        try {
-            const token = await jwt.sign(payload, SECRET, { expiresIn: "3d" });
-
-               // set jwt as a cookie;
-               res.cookie("token", token);
-               res.redirect("/profile")
-            
-        } catch (error) {
-            console.log({error});
-            
-            res.status(401).send("UnAuthorized! :(")
-        }
-       
+        const payload = { username }
+        jwt.sign(payload, SECRET, { expiresIn: "3d" }, (err, token) => {
+            if (err) {
+                return res.redirect('/404')
+            }
+            // set jwt as a cookie;
+            res.cookie("token", token);
+            res.redirect("/profile")
+        })
     } else {
+
         res.status(401).send("UnAuthorized! :(")
     }
 
@@ -113,15 +107,12 @@ app.get("/profile", async (req, res) => {
     const token = req.cookies["token"];
     console.log({ token });
     if(token){
-        try {
-            const payload  = await jwt.verify(token, SECRET);
-             res.send(`Profile : ${payload.username}`)
-
-
-        } catch (error) {
-             res.status(401).send('Unauthorized !')
-        }
-      
+        jwt.verify(token, SECRET,(err, payload) =>{
+            if(err){
+                return res.status(401).send('Unauthorized !')
+            }
+            return res.send(`Profile : ${payload.username}`)
+        })
 
     }else{
 
