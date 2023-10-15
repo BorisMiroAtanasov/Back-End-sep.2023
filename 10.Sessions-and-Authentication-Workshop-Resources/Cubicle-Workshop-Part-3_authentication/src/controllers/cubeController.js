@@ -69,7 +69,28 @@ const options = dificultyLevelOptionsViewData(cube.difficultyLevel);
 //console.log({options});
 
   res.render("cube/edit", {cube,options})
+});
+
+router.post('/:cubeId/edit', async (req, res) =>{
+  const {cubeId} = req.params
+  const { name, imageUrl, difficultyLevel, description} = req.body;
+
+  const payload = {name, imageUrl, difficultyLevel, description};
+
+  await cubeService.update(cubeId, payload)
+
+  res.redirect(`/cubes/${cubeId}/details`)
 })
+
+// router.post("/:cubeId/edit", async (req, res) => {
+//   const { cubeId } = req.params;
+//   const { name, imageUrl, difficultyLevel, description } = req.body;
+//   const payload = { name, imageUrl, difficultyLevel, description };
+
+//   await cubeService.update(cubeId, payload);
+
+//   res.redirect(`/cubes/${cubeId}/details`);
+// });
 
 router.get('/:cubeId/delete', async(req, res) =>{
   const {cubeId} = req.params;
