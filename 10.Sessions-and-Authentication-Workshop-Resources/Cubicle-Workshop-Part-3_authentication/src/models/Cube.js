@@ -9,7 +9,11 @@ const cubeSchema = new mongoose.Schema({
   accessories : [{
     type: mongoose.Types.ObjectId, // type from nongo
     ref: "Accessory" // the name of the model
-  }]
+  }],
+  owner:{
+    type: mongoose.Types.ObjectId,
+    ref: 'Owner',
+  }
   
 });
 
