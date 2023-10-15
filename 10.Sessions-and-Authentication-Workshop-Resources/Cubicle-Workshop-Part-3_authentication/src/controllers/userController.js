@@ -9,7 +9,7 @@ router.get("/register", (req, res) => {
 router.post("/register", async (req, res) => {
  // console.log({userData: req.body});
  const {username,password,repeatPassword} = req.body
-await userService.reister({username,password,repeatPassword})
+ await userService.reister({username,password,repeatPassword})
   res.redirect("/users/login")
 })
 
@@ -17,6 +17,18 @@ await userService.reister({username,password,repeatPassword})
 router.get("/login", (req, res) => {
   res.render("user/login")
 });
+
+router.post("/login", async(req, res) => {
+//find user
+const {username, password} = req.body;
+//console.log(username, '' , password);
+const user = await userService.login(username, password)
+
+console.log({ user });
+//compare password
+
+  res.redirect('/')
+})
 
 
 

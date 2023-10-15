@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 
 
 
@@ -14,6 +15,15 @@ userSchema.virtual("repeatPassword").set(function (value) {
     }
   });
 
+userSchema.pre('save', async function () {
+    //                              word        , salt rounds
+    const hash = await bcrypt.hash(this.password , 10);
+
+    this.password = hash;
+
+
+
+})
 
 const User = mongoose.model('User', userSchema);
 
