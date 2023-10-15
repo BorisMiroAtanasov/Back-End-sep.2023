@@ -22,9 +22,9 @@ router.post("/login", async(req, res) => {
 //find user
 const {username, password} = req.body;
 //console.log(username, '' , password);
-const user = await userService.login(username, password)
+const token = await userService.login(username, password)
 
-console.log({ user });
+res.cookie('auth', token, {httpOnly: true})
 //compare password
 
   res.redirect('/')
