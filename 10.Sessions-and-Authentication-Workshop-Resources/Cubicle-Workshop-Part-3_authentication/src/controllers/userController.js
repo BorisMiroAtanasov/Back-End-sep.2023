@@ -28,6 +28,11 @@ res.cookie('auth', token, {httpOnly: true})
 //compare password
 
   res.redirect('/')
+});
+
+router.get("/logout", (req, res) =>{
+  res.clearCookie("auth")
+  res.redirect("/")
 })
 
 
