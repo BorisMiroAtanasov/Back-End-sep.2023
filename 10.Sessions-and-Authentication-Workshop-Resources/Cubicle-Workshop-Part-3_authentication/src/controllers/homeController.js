@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const cubeService = require("../service/cubeService");
+//const {isAuth} = require('../middlewares/authMiddleware')
 
 router.get("/", async (req, res) => {
   const { search, from, to } = req.query;
