@@ -2,7 +2,7 @@
   "name": "wizard-creatures-wik-task",
   "version": "1.0.0",
   "description": "Init project and structure",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js"
   },
