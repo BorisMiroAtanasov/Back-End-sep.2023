@@ -13,3 +13,13 @@
     - render home page in hbs
 7.Convert all HTML views to handlebars views
     -Group views by meaning
+8. Add controller folder with home controller
+9.Add DB 
+    - install mongoose 
+    - conect to DB
+10.Auth
+    - user controller
+    - add controller to router  
+    - fix navigations in the nav bar(login register , loguot)
+    - render login page
+    - render register page
