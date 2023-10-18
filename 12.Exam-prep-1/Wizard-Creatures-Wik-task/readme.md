@@ -17,7 +17,7 @@
 9.Add DB 
     - install mongoose 
     - conect to DB
-10.Auth
+10.Prepair user config
     - user controller
     - add controller to router  
     - fix navigations in the nav bar(login register , loguot)
