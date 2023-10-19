@@ -28,3 +28,10 @@
     - add method for register
     - create first user record in the DB
      - validate password missmatch
+     - validaite email already exist
+12. Hash password
+    - instal bycrypt 
+    - has password
+13. Login
+    - finde user by email
+    - validate password with hash
