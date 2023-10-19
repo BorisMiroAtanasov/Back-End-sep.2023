@@ -22,11 +22,13 @@ router.post("/login", async (req, res) =>{
    const token =  await userService.login(email, password);
    console.log({token});
 
-    
+    res.cookie('token', token, {httpOnly:true})
     res.redirect('/')
 });
 
-
-//to do provide logout endpoint
+router.get('/logout', (req,res) =>{
+    res.clearCookie('token');
+    res.redirect('/')
+})
 
 module.exports = router;

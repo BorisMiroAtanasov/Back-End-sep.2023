@@ -40,3 +40,8 @@
     - promisifi jsonwebtoken
     - generte secret
     - generate toke in servise login
+15.Return token in cookie
+    - install cookie parser
+    - configurate cookie parser
+     - set cookie with token
+16.Implement logout
