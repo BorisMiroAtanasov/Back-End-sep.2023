@@ -46,4 +46,19 @@
      - set cookie with token
 16.Implement logout
 17.Authentication middleware
-    - 
+    - create middleware directory
+    - add auth middleware and import in to express configuretion below cookieparser
+    - decode the token
+    - handle invalid token
+    - provide authorization
+18.Dynamic navigation
+    - contidional option in navigation
+    - add date to res.locals for hbs template
+19.Error handling
+    - add 404 page
+    - redirect missing rout to 404
+    - add global error handle (optional)
+    - error massage util
+20. Show error notification
+    - show in the main layout
+    - pass error to render in login and register pages 

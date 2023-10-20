@@ -30,15 +30,27 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="#">All Posts</a></li>
                 <!-- Logged users -->
+                {{#if isAutenticated}}
                 <li><a href="#">Create Post</a></li>
                 <li><a href="#">Profile</a></li>
                 <li><a href="/users/logout">Logout</a></li>
                 <!-- Guest users -->
+            {{else}}
                 <li><a href="/users/register">Register</a></li>
                 <li><a href="/users/login">Login</a></li>
+                 {{/if }}
             </ul>
 
         </nav>
+        {{#if errorMessages}}
+   <div class="error-container">
+        {{#each errorMessages}}
+    <p> {{this}}</p>
+   
+        {{/each}}
+    </div>
+    {{/if }}
+
 
   {{{body}}}
 
