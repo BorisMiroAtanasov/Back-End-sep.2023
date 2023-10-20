@@ -7,7 +7,7 @@ jsonwebtoken.verify
 
 const jwt = {
     sign:promisify(jsonwebtoken.sign),
-    vverify:promisify(jsonwebtoken.verify)
+    verify:promisify(jsonwebtoken.verify)
 
 };
 
