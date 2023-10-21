@@ -1,4 +1,5 @@
 1. Init project and structure
+    - add git ignore
 2. Setup developer inviroment
 3. Install express and nodemon
     - configer static middleware
