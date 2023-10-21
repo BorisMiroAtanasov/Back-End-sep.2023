@@ -12,21 +12,28 @@
                     <h3>Damages: {{electronicDevice.damages}}</h3>
                     <h3>Description: {{electronicDevice.description}}</h3>
                     <h2>Price: ${{electronicDevice.price}}</h2>
+                  
                 </div>
-
                 <!--If there is user logged in-->
+                {{#if isAutenticated}}
                 <div class="buttons">
-                    
-                    <!--If user is not owner of the toy post-->
-                    <a href="#" class="buy-btn">Buy</a>
 
+                    {{#if isOwner}}
                     <!--If user is owner-->
-                    <a href="#" class="edit-btn">Edit</a>
-                    <a href="#" class="delete-btn">Delete</a>
+                    <a href="/posts/{{electronicDevice._id}}/edit" class="edit-btn">Edit</a>
+                    <a href="/posts/{{electronicDevice._id}}/delete" class="delete-btn">Delete</a>
+                    <!--If user is not owner of the toy post-->
+                    {{else}}
+                    <a href="#" class="buy-btn">Buy</a>
+                   
 
                     <!--If user is not the owner and is bought this toy-->
                     <p><span class="buy">Thank You For Your Purchase</span></p>
+                 {{/if }}
                 </div>
+                   {{/if}}
+          
+
             </div>
         </section>
 

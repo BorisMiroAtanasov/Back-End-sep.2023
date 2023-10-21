@@ -8,6 +8,8 @@ exports.create = (electronicsData) =>{
 exports.getAll = () => Electronics.find();
 
 
-exports.singleDevice = (electronicsId) => Electronics.findById(electronicsId)
+exports.singleDevice = (electronicsId) => Electronics.findById(electronicsId);
+
+exports.update = (electronicsId, creataData) =>Electronics.findByIdAndUpdate(electronicsId, creataData)
 
 
