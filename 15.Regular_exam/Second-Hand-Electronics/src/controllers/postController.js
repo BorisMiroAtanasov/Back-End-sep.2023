@@ -2,7 +2,7 @@ const router = require("express").Router();
 const electronicsService = require('../services/electronicsService')
  
 router.get("/catalog", async(req, res) => {
-const electronicsAll = await electronicsService.getAll().lean();
+const electronicsAll = await electronicsService.getAll().lean(); // for check [] - "Therre is no electronics found"
 //console.log({electronicsAll});
   res.render("post/catalog" , {electronicsAll});
 });

@@ -2,6 +2,7 @@
 
         <section id="viewCatalog" class="background-img">
             <!--If there are one or more electronics-->
+            {{#if electronicsAll}}
             <div class="added-electronics">
                 {{#each electronicsAll}}
                 <a href="/posts/{{_id}}/details" class="added-electronics-in-market">
@@ -10,13 +11,12 @@
                     <span>Price:${{price}}</span>
                 </a>
                 {{/each}}
-
-              
-
             </div>
+            {{else}}
 
             <!--If there are no electronics in catalog yet-->
-            <!-- <div class="guest">
+             <div class="guest">
                 There are no electronics found...
-            </div> -->
+            </div> 
+            {{/if}}
         </section>
