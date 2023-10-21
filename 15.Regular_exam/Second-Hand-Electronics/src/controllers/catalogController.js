@@ -1,7 +1,7 @@
 const router  = require("express").Router();
 
-router.get('/all', (req, res) =>{
-   res.render("post/all-posts")
+router.get('/catalog', (req, res) =>{
+   res.render("post/catalog")
 
 })
 

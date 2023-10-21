@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const homeController = require('./controllers/homeController')
 const userController = require('./controllers/userController')
-const allPostsController = require('./controllers/postsController')
+const catalogController = require('./controllers/catalogController')
 //to do add endpoints with controllers here...
 
 router.use(homeController);
 router.use('/users', userController)
-//router.use('/posts', allPostsController)
+router.use('/posts', catalogController)
 
 
 router.get('*', (req, res) =>{
