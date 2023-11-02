@@ -20,8 +20,14 @@ router.post("/create", async(req, res) => {
   res.redirect("/posts/all");
 });
 
-router.get("/profile", (req, res) => {
-  res.render("post/profile");
+router.get("/profile", async(req, res) => {
+   const {user} = req;
+
+   const myCreatures = await creatureServise.getMyCreatures(user?._id).lean() // [] - for no posts
+   // console.log({user});
+   // console.log({myCreatures});
+
+  res.render("post/profile" , {myCreatures});
 });
 
 router.get("/:creatureId/details" , async(req,res) => {
@@ -59,8 +65,10 @@ await creatureServise.update(creatureId,payload)
    res.redirect(`/posts/${creatureId}/details`)
 });
 
-router.get("/:creatureId/delete", (req, res) => {
+router.get("/:creatureId/delete", async(req, res) => {
    const {creatureId} = req.params;
+
+   await creatureServise.delete(creatureId)
 
    res.redirect("/posts/all")
 
