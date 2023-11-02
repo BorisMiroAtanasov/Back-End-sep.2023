@@ -28,10 +28,26 @@ router.get("/:creatureId/details" , async(req,res) => {
    const {creatureId} = req.params
   // console.log({creatureId});
 
-   const creature = await creatureServise.singleCreature(creatureId).lean()
+   const creature = await creatureServise.singleCreature(creatureId).lean();
+   //const isUserCreature = 
    
    //console.log({creature});
-   res.render("post/details" , {creature})
+   const {user} = req;
+   console.log({user});
+   const {owner} = creature
+   console.log({owner});
+
+   const isOwner = user?._id === owner.toString();
+   //console.log({isOwner});
+   res.render("post/details" , {creature, isOwner})
+});
+
+router.get("/:creatureId/edit", (req, res) => {
+   const {creatureId} = req.params
+});
+
+router.get("/:creatureId/delete", (req, res) => {
+   const {creatureId} = req.params
 })
 
 module.exports = router;
