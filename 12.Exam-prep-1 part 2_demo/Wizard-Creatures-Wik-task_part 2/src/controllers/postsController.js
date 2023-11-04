@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const creatureServise = require ('../services/creatureServise')
+const {isAuth} = require ('./../middleware/authMiddleware')
+const {extractMsgs} = require('../utils/errorHandlers')
 
 router.get("/all", async(req, res) => {
    const cretures =  await creatureServise.getAll().lean()     // или подаваме [] -> there is no creatures
@@ -7,20 +9,28 @@ router.get("/all", async(req, res) => {
   res.render("post/all-posts", {cretures});
 });
 
-router.get("/create", (req, res) => {
+router.get("/create",isAuth, (req, res) => {
   res.render("post/create");
 });
 router.post("/create", async(req, res) => {
    //console.log(req);
    const { name, species, skinColor, eyeColor, image, description } = req.body;
    const payload = { name, species, skinColor, eyeColor, image, description, owner: req.user }
+   try {
+      await creatureServise.create(payload)
+      res.redirect("/posts/all");
+      
+   } catch (error) {
+      const errorMessages = extractMsgs(error)
    
+    res.status(404).render('post/create', {errorMessages})
 
-   await creatureServise.create(payload)
-  res.redirect("/posts/all");
+      
+   }
+
 });
 
-router.get("/profile", async(req, res) => {
+router.get("/profile", isAuth,async(req, res) => {
    const {user} = req;
 
    const myCreatures = await creatureServise.getMyCreatures(user?._id).lean() // [] - for no posts
