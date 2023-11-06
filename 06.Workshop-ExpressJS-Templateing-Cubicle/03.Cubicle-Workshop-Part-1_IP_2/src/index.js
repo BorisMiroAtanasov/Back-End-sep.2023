@@ -5,7 +5,8 @@ const app = express();
 const PORT = 5000;
 
 //express config
-app.use(express.static(path.resolve(__dirname,'public')));
+//app.use(express.static(path.resolve(__dirname,'public')));
+app.use(express.static('src/public'));
 
 
 
