@@ -7,12 +7,13 @@ const app = express();
 
 // handlebars config
 app.engine('hbs', handlebaars.engine({extname: 'hbs'}));
-app.set('view engine', "hbs")
+app.set('view engine', "hbs");
+app.set("views", "src/views")
 
 
 //routes
 app.get('/', (req, res) =>{
-    res.send("Hello from express")
+    res.render("index")
 });
 
 
