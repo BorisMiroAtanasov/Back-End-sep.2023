@@ -4,6 +4,7 @@ const path = require('path');
 const expressConfig = require('./connfig/expressConfig');
 const handlebarsConfig = require('./connfig/handlebarsConfig');
 const homeController = require('./controllers/homeController')
+const cubeController = require('./controllers/cubeController')
 const app = express();
 const PORT = 5000;
 
@@ -16,6 +17,7 @@ handlebarsConfig(app)
 // app.get('/', homeController.getHome) - not good practise
 
 app.use(homeController)
+app.use('/cubes',cubeController)
 
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`))
