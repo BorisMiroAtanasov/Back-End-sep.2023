@@ -3,7 +3,6 @@ const cubeManager = require('../managers/cubeManager')
 
 // Path , is  /cubes/create (URL)
  router.get('/create', (req,res) =>{
-    console.log(cubeManager.getAll());
     res.render('create')
  })
 
