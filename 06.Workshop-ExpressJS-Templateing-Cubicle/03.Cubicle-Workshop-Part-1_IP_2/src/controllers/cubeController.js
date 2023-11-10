@@ -18,6 +18,12 @@ const cubeManager = require('../managers/cubeManager')
           difficultyLevel: Number(difficultyLevel)
         })
     res.redirect('/')
+ });
+
+ router.get('/:cubeId/details', (req, res) =>{
+    const cubeId = req.params.cubeId
+    const cube = cubeManager.getOne(cubeId)
+    res.render('details' ,{cube})
  })
 
 
