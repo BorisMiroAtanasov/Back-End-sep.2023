@@ -9,13 +9,14 @@ const cubeManager = require('../managers/cubeManager')
 
 
  router.post('/create', (req,res) =>{
-    const {name , description, imageUrl, difficulty} = (req.body);
+    const {name , description, imageUrl, difficultyLevel} = (req.body);
 
 
-    cubeManager.create({name ,
+    cubeManager.create({
+        name ,
          description,
           imageUrl, 
-          difficulty: Number(difficulty)
+          difficultyLevel: Number(difficultyLevel)
         })
     res.redirect('/')
  })
