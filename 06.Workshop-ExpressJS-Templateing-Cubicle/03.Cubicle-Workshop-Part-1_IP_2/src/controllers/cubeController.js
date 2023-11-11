@@ -22,7 +22,11 @@ const cubeManager = require('../managers/cubeManager')
 
  router.get('/:cubeId/details', (req, res) =>{
     const cubeId = req.params.cubeId
-    const cube = cubeManager.getOne(cubeId)
+    const cube = cubeManager.getOne(cubeId);
+
+    if(!cube){
+        return res.redirect('/404')
+    }
     res.render('details' ,{cube})
  })
 
