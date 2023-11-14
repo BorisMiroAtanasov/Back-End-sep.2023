@@ -4,6 +4,8 @@ const dogSchema = new mongoose.Schema({
     name:{
         type: String,
         require : true,
+        minLength: 3,
+        maxLength : 10,
     },
     age: Number,
     breed: String
@@ -16,6 +18,11 @@ dogSchema.methods.greed = function () {
 dogSchema.virtual('info').get(function () {
     return `My name is ${this.name} and I am ${this.age} years old`
     
+});
+
+
+dogSchema.static('giveMeCats' , function(){
+    return this.find()
 })
 const Dog = mongoose.model("Dog", dogSchema);
 

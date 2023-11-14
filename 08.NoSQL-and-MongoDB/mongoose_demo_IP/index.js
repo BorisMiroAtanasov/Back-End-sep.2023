@@ -9,7 +9,10 @@ async function connectDb (){
    const dogs = await Dog.find({color: "orange"})
 
    //dogs.forEach( dog => dog.greed())
-   dogs.forEach( dog => console.log(dog.info))
+  // dogs.forEach( dog => console.log(dog.info));
+
+  const result = await Dog.giveMeCats();
+  console.log(result);
 
 }
 connectDb()
