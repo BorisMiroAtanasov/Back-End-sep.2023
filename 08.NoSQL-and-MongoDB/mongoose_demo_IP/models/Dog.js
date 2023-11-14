@@ -8,19 +8,20 @@ const dogSchema = new mongoose.Schema({
         maxLength : 10,
     },
     age: Number,
-    breed: String
+    color: String
 });
-
+// instance method
 dogSchema.methods.greed = function () {
-    console.log(`Hello I am Dog, and my name is ${this.name}`);
+    console.log(`Hello I am Dog, and my name is ${this.name}`); 
 };
 
-dogSchema.virtual('info').get(function () {
-    return `My name is ${this.name} and I am ${this.age} years old`
+// virtual property
+dogSchema.virtual('info').get(function () { 
+    return `My name is ${this.name} and I am ${this.age} years old` 
     
 });
 
-
+// Static model method
 dogSchema.static('giveMeCats' , function(){
     return this.find()
 })
