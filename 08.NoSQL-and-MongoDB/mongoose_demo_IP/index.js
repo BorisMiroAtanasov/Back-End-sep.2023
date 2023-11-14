@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Dog = require('./models/Dog')
+const Dog = require('./models/Dog');
+const Person = require('./models/Persons')
 
 async function connectDb() {
   await mongoose.connect('mongodb://127.0.0.1:27017/dogsDB');
@@ -52,6 +53,17 @@ await Dog.findByIdAndDelete('65229e8425cd4e15aeeec97e')
   //dogs.forEach( dog => dog.greed()) // instace method
   // dogs.forEach( dog => console.log(dog.info)); // virtual property
   //const result = await Dog.giveMeCats(); //static модел method
+
+  //Creating collection by creating first  record in non existing coolection
+  // await Person.create({
+  //   name:'Pesho',
+  //   age: 25,
+  // });
+
+  //find colection not equal to color orange
+
+ const notOrange =  await Dog.find({color: {$ne: 'orange'}});
+ console.log(notOrange);
 
 }
 connectDb()
