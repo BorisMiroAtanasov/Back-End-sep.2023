@@ -23,7 +23,7 @@ async function connectDb() {
 
 //Create method 2 
   // const newDog = await Dog.create({
-  //   name: "Charli",
+  //   name: "Ch",
   //   age: 3,
   //   color: "Brown",
   // })
@@ -62,7 +62,8 @@ await Dog.findByIdAndDelete('65229e8425cd4e15aeeec97e')
 
   //find colection not equal to color orange
 
- const notOrange =  await Dog.find({color: {$ne: 'orange'}});
+ //const notOrange =  await Dog.find({color: {$ne: 'orange'}}); //native query
+ const notOrange  = await Dog.find().where('color').ne('orange') // mongoose query
  console.log(notOrange);
 
 }
