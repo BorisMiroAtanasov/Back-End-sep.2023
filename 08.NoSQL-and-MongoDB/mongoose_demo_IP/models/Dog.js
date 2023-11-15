@@ -7,6 +7,11 @@ const dogSchema = new mongoose.Schema({
         minLength: 3,
         maxLength : 10,
     },
+    breed: {
+        type:string,
+        require:false,
+        enum :[koli, pudel, biegal],
+    },
     age: Number,
     color: String
 });
