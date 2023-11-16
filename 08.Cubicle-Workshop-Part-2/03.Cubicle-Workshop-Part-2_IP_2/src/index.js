@@ -22,11 +22,16 @@ dbConnect()
 expressConfig(app)
 //require('./connfig/expressConfig')(app) - second variant
 handlebarsConfig(app)
+
+dbConnect()
+    .then(() => console.log('DB connect successfuly'))
+    .catch(err => {
+        console.log('DB error: ', err);
+    });
+
+
 app.use(routes)
 
 // app.get('/', homeController.getHome) - not good practise
-
-
-
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`))
