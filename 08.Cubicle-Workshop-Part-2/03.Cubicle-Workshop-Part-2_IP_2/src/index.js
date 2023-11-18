@@ -11,11 +11,7 @@ const routes = require('./routes')
 const app = express();
 const PORT = 5000;
 
-dbConnect()
-    .then(() => console.log('DB connect successfuly'))
-    .catch(err => {
-        console.log('DB error: ', err);
-    });
+
 
 
 
