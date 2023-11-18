@@ -21,15 +21,14 @@ const cubeManager = require('../managers/cubeManager')
  });
 
  router.get('/:cubeId/details', async (req, res) =>{
-    const cubeId = req.params.cubeId
-    const cube = await cubeManager.getOne(cubeId).lean();
-
+    //const cubeId =  req.params.cubeId
+    
+    const cube = await cubeManager.getOne(req.params.cubeId).lean();
+    //console.log({cube});
     if(!cube){
         return res.redirect('/404')
     }
     res.render('details' ,{cube})
  })
-
-
 
 module.exports = router
