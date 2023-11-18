@@ -29,6 +29,10 @@ const cubeManager = require('../managers/cubeManager')
         return res.redirect('/404')
     }
     res.render('details' ,{cube})
+ });
+
+ router.get('/:cubeId/attach-accessory', (req, res) =>{
+   res.render('accessory/attach')
  })
 
 module.exports = router
