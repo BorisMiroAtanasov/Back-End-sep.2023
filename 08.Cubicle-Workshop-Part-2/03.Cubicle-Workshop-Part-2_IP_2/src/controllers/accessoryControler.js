@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const accessoryManager = require('../managers/accessoryManager')
 
 
 router.get('/create', (req, res) =>{
@@ -7,10 +8,9 @@ router.get('/create', (req, res) =>{
 
 
 router.post('/create', (req, res) =>{
-    const body = req.body;
+    const {name, description,imageUrl} = req.body;
 
-    console.log(body);
-    // TODO add accessory data to DB
+    accessoryManager.create({name, description,imageUrl})
 
     res.redirect('/')
 })
