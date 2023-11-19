@@ -1,28 +1,80 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const bcrypt = require('bcrypt')
+
 const { v4: uuid } = require("uuid");
 const app = express();
 
-const session = {};
 
 app.use(cookieParser());
+app.use(express.urlencoded({extended:false}))
+
+const users = {};
+
+
 
 app.get("/", (req, res) => {
-  let id ;;
+    console.log(users);
 
-  const userId = req.cookies["userId"];
-  if (userId) {
-      id = userId;
-      console.log(`User secret:`, session[userId].secret );
-  } else {
-    id = uuid();
-    session [id] = {
-        secret: 'My secret'
-    }
-    res.cookie("userId", id);
-  }
+    res.send('OK')
 
-  res.send(`Hello user - ${id}`);
 });
+
+
+app.get('/register', (req,res) =>{
+
+
+    res.send(`<form method="POST">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
+    <input type="submit" value="Register">
+</form>`)
+});
+
+app.post('/register' , async(req, res) =>{
+
+    const {username, password} = req.body;
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password ,salt);
+
+    users[username] = {
+        password: hash
+    };
+
+    res.redirect('/login')
+
+
+})
+
+app.get('/login', (req,res) =>{
+
+
+    res.send(`<form method="POST">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
+    <input type="submit" value="Login">
+</form>`)
+});
+
+app.post('/login', async(req,res) =>{
+    const {username, password} = req.body;
+
+    const hash = users[username]?.password
+
+    const isVAlid = await bcrypt.compare(password,hash)
+
+    if (isVAlid){
+        res.send('Successfuly logged in')
+    }else{
+        res.send('Unauthorized')
+    }
+    
+
+})
 
 app.listen(5000, () => console.log("Server is listening om port 5000..."));
