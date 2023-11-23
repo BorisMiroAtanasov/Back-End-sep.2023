@@ -1,9 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-
-const secret = 'alabalasecret'
 
 const { v4: uuid } = require("uuid");
 const app = express();
@@ -17,9 +14,9 @@ const users = {};
 
 
 app.get("/", (req, res) => {
+    console.log(users);
 
-
-    res.send('Hello')
+    res.send('OK')
 
 });
 
@@ -39,9 +36,8 @@ app.get('/register', (req,res) =>{
 app.post('/register' , async(req, res) =>{
 
     const {username, password} = req.body;
-  
-       const   salt = await bcrypt.genSalt(15);
-    
+
+    const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password ,salt);
 
     users[username] = {
@@ -73,43 +69,12 @@ app.post('/login', async(req,res) =>{
     const isVAlid = await bcrypt.compare(password,hash)
 
     if (isVAlid){
-        // generate jwt token
-        const payload = {username }
-        jwt.sign(payload , secret , {expiresIn : '2d'}, (err, token) => {
-            if(err){
-                return res.redirect('404')
-            }
-            // set jwt token as cookie
-            res.cookie('token', token)
-            res.redirect('/profile')
-        });
-
+        res.send('Successfuly logged in')
     }else{
-        res.status(401).send('Unauthorized')
+        res.send('Unauthorized')
     }
-});
-
-app.get('/profile', (req, res) =>{
-
-    // get token
-    const token = req.cookies.token
-
-    //verify token
-    if(token){
-        jwt.verify(token, secret, (err, payload) =>{
-            if (err){
-               return res.status(401).send('Unauthorized')
-            }
-
-            //allow request if valid
-            return res.send(`profile: ${payload.username}`)
-        });
-
-    }
-    res.redirect('/login')
+    
 
 })
-
-
 
 app.listen(5000, () => console.log("Server is listening om port 5000..."));

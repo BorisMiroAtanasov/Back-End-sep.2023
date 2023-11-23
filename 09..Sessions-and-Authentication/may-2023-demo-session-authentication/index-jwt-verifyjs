@@ -3,8 +3,6 @@ const cookieParser = require("cookie-parser");
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const secret = 'alabalasecret'
-
 const { v4: uuid } = require("uuid");
 const app = express();
 
@@ -17,11 +15,28 @@ const users = {};
 
 
 app.get("/", (req, res) => {
+    console.log(users);
 
+    const payloads = {_id: uuid(), usermane: 'Pesho'}
+    const options = {expiresIn : '2d'}
+    const secret = 'MySuperPrivetSecret';
 
-    res.send('Hello')
+    const token = jwt.sign(payloads, secret, options)
+
+    res.send('token')
 
 });
+
+app.get('/verify/:token', (req, res) =>{
+    const token = req.params.token;
+   // console.log(req.params);
+    //console.log(token);
+    const payload = jwt.verify(token, 'MySuperPrivetSecret');
+
+    console.log(payload);
+
+    res.send('ok')
+})
 
 
 app.get('/register', (req,res) =>{
@@ -74,42 +89,14 @@ app.post('/login', async(req,res) =>{
 
     if (isVAlid){
         // generate jwt token
-        const payload = {username }
-        jwt.sign(payload , secret , {expiresIn : '2d'}, (err, token) => {
-            if(err){
-                return res.redirect('404')
-            }
-            // set jwt token as cookie
-            res.cookie('token', token)
-            res.redirect('/profile')
-        });
 
+        // set jwt token as cookie
+        res.redirect('/profile')
     }else{
         res.status(401).send('Unauthorized')
     }
-});
-
-app.get('/profile', (req, res) =>{
-
-    // get token
-    const token = req.cookies.token
-
-    //verify token
-    if(token){
-        jwt.verify(token, secret, (err, payload) =>{
-            if (err){
-               return res.status(401).send('Unauthorized')
-            }
-
-            //allow request if valid
-            return res.send(`profile: ${payload.username}`)
-        });
-
-    }
-    res.redirect('/login')
+    
 
 })
-
-
 
 app.listen(5000, () => console.log("Server is listening om port 5000..."));
