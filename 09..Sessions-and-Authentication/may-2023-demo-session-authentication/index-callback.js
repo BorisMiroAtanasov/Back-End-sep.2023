@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bcrypt = require('bcrypt')
-const jwt = require('./lib/jwt')
+const jwt = require('jsonwebtoken')
 
 const secret = 'alabalasecret'
 
@@ -74,44 +74,41 @@ app.post('/login', async(req,res) =>{
 
     if (isVAlid){
         // generate jwt token
-        try {
-            const payload = {username }
-            const token = await jwt.sign(payload , secret , {expiresIn : '2d'});
+        const payload = {username }
+        jwt.sign(payload , secret , {expiresIn : '2d'}, (err, token) => {
+            if(err){
+                return res.redirect('404')
+            }
+            // set jwt token as cookie
             res.cookie('token', token)
             res.redirect('/profile')
-
-        } catch (err) {
-            console.log(err);
-            return res.redirect('404')
-            
-        }
-        
-            
-       
+        });
 
     }else{
         res.status(401).send('Unauthorized')
     }
 });
 
-app.get('/profile', async(req, res) =>{
+app.get('/profile', (req, res) =>{
 
-    const token = req.cookies['token']
+    // get token
+    const token = req.cookies.token
+
+    //verify token
     if(token){
-    try {
-      const payload = await  jwt.verify(token, secret)
-          return res.send(`profile: ${payload.username}`)
-        
-    } catch (err) {
-        return res.status(401).send('Unauthorized')
-    } 
-    }else{
+        jwt.verify(token, secret, (err, payload) =>{
+            if (err){
+               return res.status(401).send('Unauthorized')
+            }
 
-        res.redirect('/login')
+            //allow request if valid
+            return res.send(`profile: ${payload.username}`)
+        });
+
     }
- 
+    res.redirect('/login')
 
-});
+})
 
 
 
