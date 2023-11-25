@@ -1,0 +1,4 @@
+
+
+
+exports.SECRET = 'someveryverylongsecret'

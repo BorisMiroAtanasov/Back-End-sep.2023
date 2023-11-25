@@ -1,6 +1,8 @@
 const { findOne } = require('../models/Cube');
 const User = require('../models/User')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const jwt = require('../lib/jwt');
+const {SECRET} = require('../connfig/config')
 
 
 exports.register = (userDate) => User.create(userDate);
@@ -19,8 +21,12 @@ exports.login = async(username, password) => {
 
     if(!isValid){
         throw new Error('Cannot find user or password')
-    }
+    };
+    const payload = {
+        _id: user._id,
+        username: user.username,
+    } 
+    const token = await jwt.sign(payload, SECRET, {expiresIn: '2d'})
     //todo return user
-
-    return  user;
+    return  token;
 }
