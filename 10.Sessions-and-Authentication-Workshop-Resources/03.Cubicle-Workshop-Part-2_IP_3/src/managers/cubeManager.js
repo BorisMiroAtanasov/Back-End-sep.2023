@@ -1,5 +1,6 @@
 
-const Cube = require('../models/Cube')
+const Cube = require('../models/Cube');
+const User = require('../models/User');
 
 
 
@@ -38,3 +39,5 @@ exports.attachAccessory = async (cubeId, accessoryId) => {
 
     return cube.save();
 };
+
+exports.delete = (cubeId) => Cube.findByIdAndDelete(cubeId)
