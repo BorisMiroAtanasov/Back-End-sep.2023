@@ -3,5 +3,7 @@ exports.validateName = (req, res, next) => {
         return res.status(404).send('Invalid name');
     }
 
-    next();
+    next()
+
+ 
 };
