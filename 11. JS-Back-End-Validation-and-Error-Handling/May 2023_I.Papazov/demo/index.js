@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
     `);
 });
 
-const bodyPasswordValidator = body('password').isLength({ min: 3, max: 20 }).withMessage('Invalid password').trim();
+const bodyPasswordValidator = body('password').isLength({ min: 3, max: 20 }).withMessage('Invalid pagdfgdgdgfdddddddddddddddddddddddddddddddssword')
 const bodyEmailValidator = body('email').isEmail().normalizeEmail();
 
 app.post('/',
@@ -58,4 +58,4 @@ app.post('/',
         res.send('Successfull' + email);
     });
 
-app.listen(5001, () => console.log('Server is listening on port 5000...'));
+app.listen(5000, () => console.log('Server is listening on port 5000...'));
