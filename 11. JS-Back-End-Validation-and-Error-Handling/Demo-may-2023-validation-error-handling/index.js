@@ -3,6 +3,7 @@ const validator = require('validator')
 
 const { isAgeValid } = require('./utils/validations');
 const { validateName } = require('./middlewares/miidlewares-validatae-name');
+const {body, validationResult} = require('express-validator')
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -23,21 +24,28 @@ app.get('/', (req, res) =>{
 </form>
     `)
 });
+const bodyPasswordValidator = body('passwprd').isLength({min:3, max:20}).withMessage('Invalid Password')
+app.post('/',validateName, 
+bodyPasswordValidator,
+    (req,res)=>{
+        const {name, age, password} = req.body;
 
-app.post('/',validateName,  (req,res)=>{
-    const {name, age, password} = req.body;
+        // if(!name || name.length <=3){
+        //    return res.send(`Invalid username`)
+        // };
 
-    // if(!name || name.length <=3){
-    //    return res.send(`Invalid username`)
-    // };
+        if(!isAgeValid(age)){
+        return res.send(`Invalid age`)
+        };
+        const errors = validationResult(req);
 
-    if(!isAgeValid(age)){
-       return res.send(`Invalid age`)
-    }
-    if(!validator.isStrongPassword(password)){
-        return res.send(`Weak passwor`)
-    
-    }
+        if(!errors.isEmpty()){
+            return res.status(400).send(errors.array()[0].msg)
+        }
+        // if(!validator.isStrongPassword(password)){
+        //     return res.send(`Weak passwor`)
+        
+        // }
 
     console.log(name, age);
 
