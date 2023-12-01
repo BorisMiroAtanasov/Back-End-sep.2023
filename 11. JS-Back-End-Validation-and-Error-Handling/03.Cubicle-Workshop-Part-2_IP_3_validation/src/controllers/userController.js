@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const userManager = require ('../managers/userManager');
+const {extractErrorMessage} = require ('../utils/errorHelpers')
 
 router.get('/register', (req, res) =>{
     res.render('users/register')
@@ -18,7 +19,7 @@ router.post('/register', async(req, res) =>{
     } catch (err) {
         //const firstErrorMessage = Object.values(err.errors)[0].message
         //res.status(400).render('users/register', {errorMessage: firstErrorMessage})  // expected errors
-        const errorMessages = Object.values(err.errors).map((x) => x.message)
+        const errorMessages = extractErrorMessage(err)
        
         res.status(404).render('users/register', {errorMessages} );  
     }

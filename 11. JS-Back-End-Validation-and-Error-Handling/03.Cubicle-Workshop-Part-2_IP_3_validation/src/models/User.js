@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     }, 
     password: {
         type: String,
-        required: true,
+        required: [true, `Password is reqired`],
         validate: {
             validator: function(value){
                 return /^[A-Za-z0-9]+$/.test(value)
