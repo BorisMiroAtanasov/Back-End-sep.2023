@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 
 const path = require('path');
 const expressConfig = require('./connfig/expressConfig');
+const errorHandler = require('./middlewares/errorHandlerMiddleware')
 const dbConnect = require('./connfig/dbConfig')
 const handlebarsConfig = require('./connfig/handlebarsConfig');
 
@@ -27,6 +28,8 @@ dbConnect()
 
 
 app.use(routes)
+
+app.use(errorHandler)
 
 // app.get('/', homeController.getHome) - not good practise
 
