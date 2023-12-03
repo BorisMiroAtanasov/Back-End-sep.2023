@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const userManager = require ('../managers/userManager')
+const userManager = require('../managers/userManager')
 
 
-router.get('/login', (req, res) =>{
+router.get('/login', (req, res) => {
     res.render('users/login')
 });
 
-router.post('/login', async(req, res) =>{
-    const {username, password} = req.body;
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
     const token = await userManager.login(username, password);
 
     res.cookie('token', token)// set cooke in response
@@ -17,19 +17,24 @@ router.post('/login', async(req, res) =>{
 
 
 
-router.get('/register', (req, res) =>{
+router.get('/register', (req, res) => {
     res.render('users/register')
 });
 
-router.post('/register', async(req, res) =>{
- 
-    const {username,email, password, repeatPassword } = req.body;
-    await userManager.register({username,email, password, repeatPassword});
+router.post('/register', async (req, res) => {
+
+    const { username, email, password, repeatPassword } = req.body;
+    await userManager.register({ username, email, password, repeatPassword });
 
 
-    res.send('registred')
+    res.redirect('/users/login')
 
+});
 
+router.get('/logout' , (req, res) =>{
+    res.clearCookie('token');
+
+    res.redirect('/')
 
 })
 

@@ -10,7 +10,7 @@ exports.login = async(username, password) =>{
 
     const user = await User.findOne({username});
 
-    if(user){
+    if(!user){
         throw new Error(`Invalid user or password!`)
     };
     // check password 
