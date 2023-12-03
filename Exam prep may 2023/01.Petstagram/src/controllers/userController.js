@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const userManager = require('../managers/userManager')
+const {TOKEN_KEY} = require('../config/config')
 
 
 router.get('/login', (req, res) => {
@@ -10,7 +11,7 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const token = await userManager.login(username, password);
 
-    res.cookie('token', token)// set cooke in response
+    res.cookie(TOKEN_KEY, token)// set cooke in response
 
     res.redirect('/')
 });
