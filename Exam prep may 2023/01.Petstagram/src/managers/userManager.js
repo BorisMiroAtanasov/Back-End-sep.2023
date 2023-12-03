@@ -1,5 +1,9 @@
+const { request } = require('express');
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
+
+const jwt = require('../lib/jwt');
+const SECRET = `a34a2f56-554d-4a05-8f35-c8e17a0076d8`
 
 exports.login = async(username, password) =>{
     // find user by user name 
@@ -14,9 +18,16 @@ exports.login = async(username, password) =>{
 
     if(!isValid){
         throw new Error(`Invalid user or password!`)
-    }
+    };
 
-    
+    const payload = {
+        _id: user._id,
+        username: user.username,
+        email:user.email,
+    }
+   const token =  await jwt.sign(payload, SECRET, {expiresIn: '2d'})
+
+    return token
 };
 
 exports.register = async(userData) => {

@@ -1,7 +1,8 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const mongoose = require('mongoose')
-const path = require('path')
+const path = require('path');
+const cookieParser = require('cookie-parser')
 
 const routes = require('./routes')
 const PORT = 5000
@@ -19,7 +20,8 @@ app.set('views', 'src/views')
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false })) // parsing body from the forms we recived and query string that we use
-app.use(routes)
+app.use(cookieParser());
+app.use(routes);
 
 
 app.listen(PORT, console.log(`Server is listening on port ${PORT}...`))
