@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const userManager = require('../managers/userManager')
-const {TOKEN_KEY} = require('../config/config')
+const {TOKEN_KEY} = require('../config/config');
+const {getErrorMessage}= require('../utils/errorHelpers')
 
 
 router.get('/login', (req, res) => {
@@ -9,6 +10,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
+
     const token = await userManager.login(username, password);
 
     res.cookie(TOKEN_KEY, token)// set cooke in response
@@ -25,10 +27,16 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
 
     const { username, email, password, repeatPassword } = req.body;
-    await userManager.register({ username, email, password, repeatPassword });
+
+    try {
+        await userManager.register({ username, email, password, repeatPassword });
+        res.redirect('/users/login')
+        
+    } catch (err) {
+        res.render('users/register', {error : getErrorMessage(err)})
+    }
 
 
-    res.redirect('/users/login')
 
 });
 
