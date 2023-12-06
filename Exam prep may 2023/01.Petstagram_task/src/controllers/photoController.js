@@ -2,9 +2,12 @@ const router = require('express').Router();
 const photoManager = require('../managers/photoManager');
 const {getErrorMessage} = require('../utils/errorHelpers')
 
+router.get('/' ,(req,res) =>{
+    res.render('photos/catalog')
+})
+
 
 router.get('/create' , (req, res) =>{
-
 
     res.render('photos/create')
 });
