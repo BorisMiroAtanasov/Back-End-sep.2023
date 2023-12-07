@@ -2,8 +2,9 @@ const router = require('express').Router();
 const photoManager = require('../managers/photoManager');
 const {getErrorMessage} = require('../utils/errorHelpers')
 
-router.get('/' ,(req,res) =>{
-    res.render('photos/catalog')
+router.get('/catalog' ,async(req,res) =>{
+   const  photos = await photoManager.getAll().lean() // photoManager.getAll -> дава query, -> .lean() когато се ресолвне , ще даде чистия масив
+    res.render('photos/catalog' , {photos})
 })
 
 
