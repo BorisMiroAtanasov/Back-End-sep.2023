@@ -7,3 +7,6 @@ exports.getAll = () =>Photo.find().populate('owner');
 
 
 exports.getOne = (photoId) => Photo.findById(photoId).populate('owner');
+
+
+exports.delete = (photoId) => Photo.findByIdAndDelete(photoId)

@@ -21,7 +21,7 @@ router.post('/create' , async(req, res) =>{
 
     try {
         await photoManager.create(photoData)
-        res.redirect('/photos')
+        res.redirect('/photos/catalog')
     } catch (err) {
         res.render('photos/create' , {error: getErrorMessage(err)} )
     }
@@ -31,12 +31,27 @@ router.post('/create' , async(req, res) =>{
 router.get('/:photoId/details', async(req,res) =>{
     const photoId = req.params.photoId;
     const photo = await photoManager.getOne(photoId).lean();
-    const isOwner = req.user._id == photo.owner._id;
+    const isOwner = req.user?._id == photo.owner._id;
 
 
     res.render('photos/details',{photo, isOwner})
 
     });
+
+    router.get('/:photoId/delete', async(req,res) =>{
+        const photoId = req.params.photoId;
+
+        try {
+            await photoManager.delete(photoId)
+            res.redirect('/photos/catalog')
+        } catch (err) {
+            res.render(`photos/details`, {error: 'Unseccessful deletion'})
+            
+        }
+       
+    
+    
+        });
 
 
 
