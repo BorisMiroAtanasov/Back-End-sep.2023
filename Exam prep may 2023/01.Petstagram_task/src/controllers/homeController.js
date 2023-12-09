@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const photoManager = require('../managers/photoManager')
+const photoManager = require('../managers/photoManager');
+const {isAuth} = require('../middlewares/authMiddleware');
 
 
 router.get('/', (req, res) => {
@@ -12,7 +13,7 @@ router.get('/404', (req, res) =>{
     res.render('404')
 });
 
-router.get('/profile', async(req,res) =>{
+router.get('/profile',isAuth, async(req,res) =>{
     const userId = req.user._id
     const photos = await photoManager.getByOwner(userId).lean()
 
