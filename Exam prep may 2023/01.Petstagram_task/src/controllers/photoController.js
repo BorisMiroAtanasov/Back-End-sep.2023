@@ -33,7 +33,7 @@ router.get('/:photoId/details', async(req,res) =>{
     const photo = await photoManager.getOne(photoId).populate('comments.user').lean();
     const isOwner = req.user?._id == photo.owner._id;
 
-    console.log(photo)
+    //console.log(photo)
 
     res.render('photos/details',{photo, isOwner})
 
