@@ -49,9 +49,32 @@ router.get('/:photoId/details', async(req,res) =>{
             
         }
        
-    
-    
+
         });
+
+    router.get('/:photoId/edit' , async(req, res) =>{
+        const photoId = req.params.photoId;
+        const photo =await photoManager.getOne(photoId).lean()
+
+        res.render('photos/edit' , {photo})
+    });
+
+
+    router.post('/:photoId/edit' , async(req, res) =>{
+        const photoData = req.body
+        const photoId = req.params.photoId;
+        
+        try {
+            await photoManager.edit(photoId, photoData);
+            res.redirect(`/photos/${photoId}/details`)
+            
+        } catch (err) {
+
+            res.render('photos/edit', {error: `Unabel to update photo`, ...photoData})
+            
+        }
+       
+    });
 
 
 
