@@ -12,13 +12,13 @@ exports.login = async(email, password) =>{
     const user = await User.findOne({email});
 
     if(!user){
-        throw new Error(`Invalid user or password!`)
+        throw new Error(`Email or Password is incorect`)
     };
     // check password 
     const isValid = await bcrypt.compare(password, user.password);
 
     if(!isValid){
-        throw new Error(`Invalid user or password!`)
+        throw new Error(`Email or Password is incorect`)
     };
 
 //     const payload = {
@@ -37,7 +37,7 @@ exports.register = async(userData) => {
     const user = await User.findOne({username:userData.username }); // без await връща промис обект
 
     if(user){
-        throw new Error ('Username already exists')
+        throw new Error ('Username is incorrect')
     }
     const createdUser = await User.create(userData);
     const token = await generateToken(createdUser)

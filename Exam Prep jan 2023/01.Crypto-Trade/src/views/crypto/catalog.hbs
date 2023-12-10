@@ -3,6 +3,7 @@
     <main>
         <section class="crypto-market">
             <h1><span>Crypto</span> Trade</h1>
+              {{#if cryptos}}
                 {{#each cryptos}}
             <div class="offer-list">
                 <div class="coin">
@@ -17,13 +18,15 @@
 
                     <a href="/cryptos/{{_id}}/details" class="btn-details">Details</a>
             </div>
-                {{else}}
+                  {{/each}}
+
+
+                </div>
+           {{else}}
             <div class="no-offer">
                 <p>There are no crypto offers found!</p>
             </div> 
-
-                </div>
-             {{/each}}
+            {{/if}}
                 
         </section>
     </main>
