@@ -2,6 +2,7 @@ const router = require('express').Router();
 const cryptoManager = require('../managers/cryptoManager');
 const { getErrorMessage } = require('../utils/errorHelpers');
 const { isAuth } = require('../middlewares/authMiddleware');
+const {paymentMethodsMap} = require('../config/config')
 
 router.get('/catalog', async (req, res) => {
     const cryptos = await cryptoManager.getAll().lean() // photoManager.getAll -> дава query, -> .lean() когато се ресолвне , ще даде чистия масив
@@ -54,25 +55,23 @@ router.get('/:cryptoId/buy', isAuth, async (req, res) => {
 
 });
 
-router.get('/:cryptoId/edit', async (req, res) => {
+router.get('/:cryptoId/edit', isAuth,async (req, res) => {
     const cryptoId = req.params.cryptoId;
-    const crypto = await cryptoManager.getOne(cryptoId).lean()
+    const crypto = await cryptoManager.getOne(cryptoId).lean();
+
+    const paymentMethods = Object.keys(paymentMethodsMap).map(key =>({
+        value: key, 
+        label:paymentMethodsMap[key],
+        isSelected: crypto.payment == key
+    }));
+   
 
 
-    res.render('crypto/edit', { crypto })//{photo, isOwner}
+    res.render('crypto/edit', { crypto, paymentMethods })//{photo, isOwner}
 });
 
-router.get('/:cryptoId/delete', async (req, res) => {
 
-    const cryptoId = req.params.cryptoId;
-    await cryptoManager.delete(cryptoId);
-
-    res.redirect('/cryptos/catalog')
-
-
-})
-
-router.post('/:cryptoId/edit', async (req, res) => {
+router.post('/:cryptoId/edit', isAuth,async (req, res) => {
     const cryptoId = req.params.cryptoId;
     const cryptoData = req.body;
 
@@ -88,6 +87,17 @@ router.post('/:cryptoId/edit', async (req, res) => {
 
 
 });
+
+router.get('/:cryptoId/delete',isAuth ,async (req, res) => {
+
+    const cryptoId = req.params.cryptoId;
+    await cryptoManager.delete(cryptoId);
+
+    res.redirect('/cryptos/catalog')
+
+
+})
+
 
 
 
