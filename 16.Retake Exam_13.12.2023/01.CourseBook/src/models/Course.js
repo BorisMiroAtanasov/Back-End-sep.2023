@@ -6,34 +6,35 @@ const courseSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, "title is requred"],
-   // minLength: [2, "title shoud be minimum two characters"],
+    minLength: [5, "title shoud be minimum five characters"],
   },
   type: {
     type: String,
     required: [true, "type shoud be min one character"],
-   // min: 1,
-    //match: [ /^https?:\/\//,"Invalid URL"],
+    minLength: [3, "type shoud be minimum three characters"],
+   
   },
   certificate : {
     type: String,
     required: [true, "image is requred"],
-    //match: [/^https?:\/\//, "Invalid URL"],
+    minLength: [2, "certificate shoud be minimum two characters"],
+ 
   },
 
   image: {
     type: String,
     required: [true, "certificate is requred"],
-   // match: [/^http?:\/\//, "Invalid URL"],
+    match: [/^https?:\/\//, "Invalid URL"],
   },
   description: {
     type: String,
     required: [true, "Description must be minimum 10 character long"],
-   // minLength: 10,
+    minLength: 10,
   },
   price: {
     type: Number,
     required:[true , 'Number shoud be positive'],
-    //min:0
+    min:0
    
 },
 
