@@ -47,9 +47,15 @@ router.get('/:cryptoId/details', async (req, res) => {//async
 });
 
 router.get('/:cryptoId/buy', isAuth, async (req, res) => {
-    const userId = req.user._id
-    const cryptoId = req.params.cryptoId
-    await cryptoManager.buy(userId, cryptoId)
+
+    try {
+        
+        const userId = req.user._id
+        const cryptoId = req.params.cryptoId
+        await cryptoManager.buy(userId, cryptoId)
+    } catch (error) {
+        res.render(`crypto/details`, { error: `Unabel to update photo`, ...cryptoData })
+    }
 
     res.redirect(`/cryptos/${cryptoId}/details`)
 
@@ -81,7 +87,7 @@ router.post('/:cryptoId/edit', isAuth,async (req, res) => {
         res.redirect(`/cryptos/${cryptoId}/details`);
 
     } catch (err) {
-        res.render(`crypto/details`, { error: `Unabel to update photo`, ...cryptoData })
+     return    res.status(400).render(`404`, { error: getErrorMessage(err) })
 
     }
 
