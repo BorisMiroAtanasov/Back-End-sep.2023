@@ -33,9 +33,10 @@ router.get("/:courseId/details", async (req, res) => {
   const course = await courseManager.getOne(courseId).lean();
 
   const isOwner = req.user?._id == course.owner._id;
-  // const isBuyer = crypto.buyers?.some( id => id == req.user?._id)
-
-  res.render("courses/details", { course, isOwner });
+   const isSignUp = course.signUpList?.some( id => id == req.user?._id)
+   const owner = course.owner.username;
+   const singupBy = course.signUpList.username
+  res.render("courses/details", { course, isOwner, isSignUp, owner,singupBy });
 });
 
 router.get("/:courseId/edit", isAuth, async (req, res) => {
@@ -64,6 +65,21 @@ router.get("/:courseId/delete", isAuth, async (req, res) => {
   await courseManager.delete(courseId);
 
   res.redirect("/courses/catalog");
+});
+
+router.get('/:courseId/signUp', isAuth, async (req, res) => {
+
+    const userId = req.user._id
+    const courseId = req.params.courseId;
+    try {
+        
+        await courseManager.signUp(userId, courseId)
+    } catch (error) {
+        res.render(`courses/details`, { error: `Unabel to update photo`, ...cryptoData })
+    }
+
+    res.redirect(`/courses/${courseId}/details`)
+
 });
 
 module.exports = router;

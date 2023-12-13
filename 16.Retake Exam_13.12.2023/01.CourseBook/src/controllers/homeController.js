@@ -5,7 +5,13 @@ const { isAuth } = require('../middlewares/authMiddleware');
 
 router.get('/', async(req, res) => {
   // console.log(req.user); // only for check do we have auth user in request
-  const courses = await courseManager.getAll().lean()
+  let courses = await courseManager.getAll().lean()
+  let number  = courses.length;
+  //console.log(number);
+  if(number > 3 ){
+    courses = courses.slice(-3)
+    
+  }
 
   //console.log(courses.length);
    res.render('home',{courses})
