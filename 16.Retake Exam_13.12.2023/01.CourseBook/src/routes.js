@@ -1,12 +1,14 @@
 const router = require('express').Router()  //модулярен раутер
 const homeController = require('./controllers/homeController');
-const userController = require('./controllers/userController')
+const userController = require('./controllers/userController');
+const courseController = require('./controllers/courseController')
 
 router.use(homeController);
 router.use('/users',userController);
-router.get('*', (req, res) =>{
-    res.redirect('/404')
-})
+router.use('/courses', courseController);
+// router.get('*', (req, res) =>{
+//     res.redirect('/404')
+// })
 
 
 

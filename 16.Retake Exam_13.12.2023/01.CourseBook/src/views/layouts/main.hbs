@@ -10,15 +10,17 @@
 </head>
 
 <body>
-
+{{#if error}}
     <!-- In case of error, you should display div with class "errorContainer" -->
     <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
 
-    <!-- <div>
+     <div>
             <div class="errorContainer">
-                <p>Error</p>
+                <p>{{error}}</p>
             </div>
-        </div> -->
+        </div>
+
+        {{/if}}
 
     <div class="navigation">
         <nav>
@@ -26,11 +28,11 @@
             <ul>
                 <!-- Guest users and Logged users -->
                 <li><a href="/">Home</a></li>
-                <li><a href="#">All Courses</a></li>
+                <li><a href="/courses/catalog">All Courses</a></li>
                 {{#if isAuthenticated}}
                 <!--For loggin users-->
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Create Course Offers</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/courses/create">Create Course Offers</a></li>
                 <li><a href="/users/logout">Logout</a></li>
                 {{else}}
                 <!--For guest users-->
