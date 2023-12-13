@@ -17,7 +17,23 @@ exports.buy = async(userId, cryptoId) =>{
 
     //await crypto.save();
    return crypto.save();
+};
+
+exports.search = async(name, payment) => {
+
+    let crypto = await this.getAll().lean();
+    if(name){
+        crypto = crypto.filter(x => x.name.toLowerCase() == name)
+
+    }
+    if(payment){
+        crypto = crypto.filter(x => x.payment == payment)
+    }
+
+    return crypto;
+
 }
+
 
 //2 вар. mongoose push
 // exports.buy = async(userId, cryptoId) =>{

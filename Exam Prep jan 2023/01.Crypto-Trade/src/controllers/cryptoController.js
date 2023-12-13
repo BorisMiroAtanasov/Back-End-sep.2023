@@ -40,7 +40,7 @@ router.get('/:cryptoId/details', async (req, res) => {//async
     // console.log(req.user._id);
     // console.log(crypto.owner._id);
     //console.log(photo)
-    const isBuyer = crypto.buyers.some( id => id == req.user?._id)
+    const isBuyer = crypto.buyers?.some( id => id == req.user?._id)
 
 
     res.render('crypto/details', { crypto, isOwner,isBuyer })
@@ -96,9 +96,18 @@ router.get('/:cryptoId/delete',isAuth ,async (req, res) => {
     res.redirect('/cryptos/catalog')
 
 
+});
+
+router.get('/search' , async(req,res) =>{
+
+   // const crypto = await cryptoManager.getAll().lean()
+
+     const {name, payment} = req.query;
+  //console.log({name, payment})
+     const crypto = await cryptoManager.search(name, payment)
+
+    res.render('crypto/search', {crypto})
 })
-
-
 
 
 
