@@ -35,8 +35,11 @@ router.get("/:courseId/details", async (req, res) => {
   const isOwner = req.user?._id == course.owner._id;
    const isSignUp = course.signUpList?.some( id => id == req.user?._id)
    const owner = course.owner.username;
-   const singupBy = course.signUpList.username
-  res.render("courses/details", { course, isOwner, isSignUp, owner,singupBy });
+   const ownerEmail = course.owner.email;
+   const singupBy = course
+   //console.log({singupBy});
+  // console.log({ownerEmail});
+  res.render("courses/details", { course, isOwner, isSignUp, owner,singupBy, ownerEmail });
 });
 
 router.get("/:courseId/edit", isAuth, async (req, res) => {

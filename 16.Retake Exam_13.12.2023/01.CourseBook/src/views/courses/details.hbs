@@ -12,13 +12,13 @@
                 <h3>Certificate: {{course.certificate}}</h3>
                 <h3>Price: €{{course.price}}</h3>
                  
-                <h3>By: {{owner}}</h3>
+                <h3>By: {{ownerEmail}}</h3>
                 
                 <!--If there are sign up users-->
                 {{#if singupBy}}
-                {{#each singupBy}}
-                <h4>Signed By: {{singupBy.username}}</h4>
-                {{/each }}
+                {{!-- {{#each singupBy}} --}}
+                <h4>Signed By: ???</h4>
+                {{!-- {{/each }} --}}
                 <!--If there are no sign up users-->
                  {{else}}
                 <h4>Nobody has signed in for this course yet</h4>
