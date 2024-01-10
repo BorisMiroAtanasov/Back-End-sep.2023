@@ -26,4 +26,6 @@ exports.login = async({email, password}) =>{
         accessToken: token,
         email:user.email,
     }
+
+    return result
 };
