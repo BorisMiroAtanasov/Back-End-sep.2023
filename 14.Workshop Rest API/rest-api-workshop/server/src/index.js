@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors')
+const mongoose = require('mongoose')
 
 const routes = require('./routes')
 
@@ -7,6 +8,9 @@ const routes = require('./routes')
 const app = express();
 const PORT = 3030;
 
+mongoose.connect("mongodb://127.0.0.1:27017/furnitures")
+.then(() => console.log('Successfully conected to the DB'))
+.catch((err) => console.log(`Error while connected to the DB:${err}`))
 
 // middleware configuration
 app.use(express.urlencoded({extended: false})) // ulrencodet, querystring
