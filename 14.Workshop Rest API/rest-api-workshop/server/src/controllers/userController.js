@@ -24,6 +24,11 @@ router.post('/login' , async(req ,res) =>{
    } catch ({message}) {
     res.status(400).json({message})
    }
+});
+
+router.get('/logout' , (req, res) =>{
+    res.end()
+
 })
 
 
