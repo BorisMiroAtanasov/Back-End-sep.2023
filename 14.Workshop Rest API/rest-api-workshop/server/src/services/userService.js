@@ -3,7 +3,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
 
-exports.register = (userData) => User.create(userData)
+exports.register =async (userData) => {
+    const user = await User.create(userData)
+
+    const result = getResult(user)
+
+    return result
+}
 
 exports.login = async({email, password}) =>{
     const user = await User.findOne({email});
@@ -18,6 +24,12 @@ exports.login = async({email, password}) =>{
         throw new Error("Invalid email or password")
     };
 
+    const result = getResult(user)
+
+    return result
+};
+
+function getResult(user) {
     const payload = {_id:user._id, email:user.email};
     const token = jwt.sign(payload, "SOME_SECRET" , {expiresIn: '2d'}) //2d is too much for SPA
 
@@ -26,6 +38,5 @@ exports.login = async({email, password}) =>{
         accessToken: token,
         email:user.email,
     }
-
     return result
-};
+}
